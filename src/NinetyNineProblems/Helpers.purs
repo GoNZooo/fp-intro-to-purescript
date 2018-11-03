@@ -1,4 +1,4 @@
-module Helpers
+module NinetyNineProblems.Helpers
   (undefined, error, todo)
 where
 
