@@ -1,0 +1,6 @@
+{
+  "name": "99-problems",
+  "scripts": {
+    "pscid": "pscid --censor-codes UnusedExplicitImport,UnusedImport"
+  }
+}

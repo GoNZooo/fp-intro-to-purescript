@@ -2,60 +2,67 @@ module NinetyNineProblems.List where
 
 import Prelude (class Eq)
 import Data.Maybe (Maybe(..))
-import Data.List (List(..))
+import Data.List (List(..), (:))
 import NinetyNineProblems.Helpers (undefined)
 
 -- A list can be either:
--- Nil                        <- The empty list, there are no elements in this list
--- Cons element restOfTheList <- `element` is the first element of the list, the `restOfTheList` is
--- in turn also a list:
+-- The empty list, there are no elements in this list: `Nil` 
+-- An element linked to the rest of the list: `element : restOfTheList`
 --
 -- Remember that `restOfTheList` can be `Nil`
--- Cons element (Cons nextElement (Cons nextElementAfterThat Nil))
+-- element : (nextElement : (nextElementAfterThat : Nil))
 
--- | Find the first element of a list, maybe returning a result depending on whether or not there
--- | is one element or more in the list.
-first :: forall a. List a -> Maybe a -- Maybe can be either `Nothing` or `Just something`
-first Nil = Nothing
-first (Cons x _) = Just x
+-- | Return the first element (the head) of a list, maybe returning a result
+-- | depending on whether or not there is one element or more in the list.
+head :: forall a. List a -> Maybe a
+head Nil = Nothing
+head (x : _) = Just x
+
+-- | Return everything except the head of the list (the tail), maybe returning
+-- | a result depending on whether or not there are any elements in the list.
+tail :: forall a. List a -> Maybe (List a)
+tail Nil = Nothing
+tail (_ : xs) = Just xs
+
 -- `_` means we do not care what is being matched, because we don't need it
 -- We've used pattern matching, which is a way of saying:
 -- "When we get input with this form, this function behaves this way."
--- In this case we're saying that if the list is `Nil` (empty), we return nothing, because
--- there can be no first element in an empty list.
+-- In this case we're saying that if the list is `Nil` (empty), we return
+-- nothing, because there can be no first element in an empty list.
 --
--- If the list instead has at least one element (`x` and some *rest of the list*)
+-- If the list instead has at least one element (`x` and some rest of the list)
 -- we return `Just x`, which is the `Maybe` version of having something.
 --
 
--- | Find the second element of a list, maybe returning a result depending on whether or not there
--- | are two elements or more in the list.
+-- | Find the second element of a list, maybe returning a result depending on
+-- | whether or not there are two elements or more in the list.
 second :: forall a. List a -> Maybe a
 second = undefined
 
--- | Find the last element of a list, maybe returning a result depending on whether or not there
--- | is one element or more in the list.
+-- | Find the last element of a list, maybe returning a result depending on
+-- | whether or not there is one element or more in the list.
 last :: forall a. List a -> Maybe a
 last = undefined
 
--- | Find the second last element of a list, maybe returning a result depending on whether or not
--- | there are two or more elements in the list.
+-- | Find the second last element of a list, maybe returning a result
+-- | depending on whether or not there are two or more elements in the list.
 secondLast :: forall a. List a -> Maybe a
 secondLast = undefined
 
--- | Drop the N first elements of a list, returning only the remainder. If N is higher than the
--- | amount of elements in the list, just return the empty list.
--- | If N is a negative number, drop nothing.
+-- | Drop the N first elements of a list, returning only the remainder. If N
+-- | is higher than the amount of elements in the list, just return the empty
+-- | list. If N is a negative number, drop nothing.
 drop :: forall a. Int -> List a -> List a
 drop = undefined
 
--- | Find the N'th element of a list, maybe returning a result depending on whether or not there
--- | are N or more elements in the list. If N is a negative number, return the first element.
+-- | Find the N'th element of a list, maybe returning a result depending on
+-- | whether or not there are N or more elements in the list. If N is a
+-- | negative number, return the first element.
 nth :: forall a. Int -> List a -> Maybe a
 nth = undefined
 
--- | Execute a function from `a` to `b`, returning the list where this function is executed on
--- | each item in the list in order.
+-- | Execute a function from `a` to `b`, returning the list where this function
+-- | is executed on each item in the list in order.
 map :: forall a b. (a -> b) -> List a -> List b
 map = undefined
 
@@ -63,8 +70,8 @@ map = undefined
 sum :: List Int -> Int
 sum = undefined
 
--- | Define a function that takes two arguments but always returns the first argument.
--- | `const 3 1 = 3`
+-- | Define a function that takes two arguments but always returns the first
+-- | argument: `const 3 1 = 3`
 const :: forall a b. a -> b -> a
 const = undefined
 
