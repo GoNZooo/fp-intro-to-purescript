@@ -70,6 +70,11 @@ absolute = undefined
 subtractNegated :: Int -> Int -> Int
 subtractNegated = undefined
 
+-- | Return whether or not the length of a string is even.
+-- | Hint: Use `String.length` to get the lengt of a string.
+stringLengthIsEven :: String -> Boolean
+stringLengthIsEven = undefined
+
 -- | Sometimes we need to ask a question about a value before we can choose
 -- | what to do with it. There are a few ways to do this, appropriate for
 -- | different scenarios. Here is the simplest, but maybe least elegant:
