@@ -107,4 +107,3 @@ duplicate = undefined
 -- | Duplicate the elements of a list N times.
 duplicateN :: forall a. Int -> List a -> List a
 duplicateN = undefined
-
