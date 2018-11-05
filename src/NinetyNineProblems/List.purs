@@ -1,6 +1,6 @@
 module NinetyNineProblems.List where
 
-import Prelude (class Eq)
+import Prelude (class Eq, (+), (<>))
 import Data.Maybe (Maybe(..))
 import Data.List (List(..), (:))
 import NinetyNineProblems.Helpers (undefined)
