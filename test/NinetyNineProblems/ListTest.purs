@@ -1,14 +1,15 @@
 module NinetyNineProblems.ListTest where
 
 import Data.Foldable as PSFoldable
-import Data.List (List)
+import Data.List (List(..), (:))
 import Data.List as PSList
-import Prelude (Unit, discard, identity, show, ($), (&&), (+), (<>), (==))
+import Prelude (Unit, discard, identity, show, ($), (&&), (+), (-), (<>), (==))
 import Prelude as P
 import Test.Spec.QuickCheck (quickCheck)
 import Test.Spec (describe, it, Spec)
 import Test.QuickCheck (withHelp)
 
+import NinetyNineProblems.Maybe (Maybe(..))
 import NinetyNineProblems.List
 
 listSpec :: Spec Unit
@@ -16,39 +17,40 @@ listSpec = do
   describe "List" do
      describe "`head`" do
         it "returns the head of the list" do
-         quickCheck $ \(xs :: List Int) ->
-           withHelp (head xs == PSList.head xs)
+         quickCheck $ \(x :: Int) (xs :: List Int) ->
+           withHelp (head (x : xs) == Just x)
            $ "Test failed:\nhead " <> show xs <> "\nis not equal to\n" <> show (PSList.head xs)
            <> "\nInstead: " <> show (head xs)
 
      describe "`tail`" do
        it "returns the tail" do
-         quickCheck $ \(xs :: List Int) ->
-           withHelp (tail xs == PSList.tail xs)
+         quickCheck $ \(x :: Int) (xs :: List Int) ->
+           withHelp (tail (x : xs) == Just xs)
            $ "Test failed:\ntail " <> show xs <> "\nis not equal to\n" <> show (PSList.tail xs)
            <> "\nInstead: " <> show (tail xs)
 
      describe "`second`" do
        it "returns second element of list" do
-         quickCheck $ \(xs :: List Int) ->
-           withHelp (second xs == PSList.head (PSList.drop 1 xs))
+         quickCheck $ \(x :: Int) (y :: Int) (xs :: List Int) ->
+           withHelp (second (x : y : xs) == Just y)
            $ "Test failed:\nsecond " <> show xs <> "\nis not equal to\n"
            <> show (PSList.head (PSList.drop 1 xs))
            <> "\nInstead: " <> show (second xs)
 
      describe "`last`" do
        it "returns the last element" do
-         quickCheck $ \(xs :: List Int) ->
-           withHelp (last xs == PSList.last xs)
+         quickCheck $ \(x :: Int) (xs :: List Int) ->
+           withHelp (last (PSList.reverse (x : xs)) == Just x)
            $ "Test failed:\nlast " <> show xs
            <> "\nis not equal to\n" <> show (PSList.last xs)
            <> "\nInstead: " <> show (last xs)
 
      describe "`secondLast`" do
        it "returns the second to last element" do
-         quickCheck $ \(xs :: List Int) ->
-           withHelp (secondLast xs == PSList.head (PSList.drop 1 (PSList.reverse xs)))
-           $ "Test failed:\nsecondLast " <> show xs <> "\n!=\n"
+         quickCheck $ \(x :: Int) (y :: Int) (xs :: List Int) ->
+           withHelp (secondLast (PSList.reverse (x : y : xs)) == Just y)
+           $ "Test failed:\nsecondLast " <> show xs
+           <> "\nis not equal to\n"
            <> show (PSList.head (PSList.drop 1 (PSList.reverse xs)))
            <> "Instead:\n" <> show (secondLast xs)
 
@@ -63,11 +65,16 @@ listSpec = do
      describe "`nth`" do
        it "returns the element at position N" do
          quickCheck $ \n (xs :: List Int) ->
-           withHelp (nth n xs == PSList.head (PSList.drop n xs)) $
-                                "Test failed:\nnth " <> show n <> " " <> show xs
-                                <> "\nis not equal to\n"
-                                <> show (PSList.head (PSList.drop n xs))
-                                <> "\nInstead: " <> show (nth n xs)
+           let
+             getAnswer :: forall a. Int -> List a -> Maybe a
+             getAnswer _ Nil = Nothing
+             getAnswer n' (x : xs') = getAnswer (n' - 1) xs'
+           in
+           withHelp (nth n xs == getAnswer n xs)
+           $ "Test failed:\nnth " <> show n <> " " <> show xs
+           <> "\nis not equal to\n"
+           <> show (PSList.head (PSList.drop n xs))
+           <> "\nInstead: " <> show (nth n xs)
 
      describe "`map`" do
        it "returns the same list on `map identity xs`" do
@@ -90,19 +97,19 @@ listSpec = do
            $ "Test failed:\nsum " <> show xs
            <> "\nis not equal to\n" <> show (PSFoldable.sum xs)
 
-     describe "`const`" do
-       it "has `const`" do
-         quickCheck $ \(n :: String) ->
-           withHelp (const 3 n == 3)
-           $ "Test failed:\nconst 3" <> show n
-           <> "\nis not equal to\n3\nInstead: " <> show (const 3 n)
+     describe "`length`" do
+       it "returns correct length" do
+         quickCheck $ \(xs :: List Boolean) ->
+           withHelp (length xs == PSList.length xs)
+           $ "Test failed:\nlength " <> show xs
+           <> "\nis not equal to\n" <> show (PSList.length xs)
 
-     describe "`id`" do
-       it "has `id`" do
-         quickCheck $ \(n :: String) ->
-           withHelp (id n == n)
-           $ "Test failed:\nid " <> show n
-           <> "\nis not equal to\n" <> show n <> "\nInstead: " <> show (id n)
+     describe "`append`" do
+       it "appends two lists" do
+         quickCheck $ \(xs :: List Int) (ys :: List Int) ->
+           withHelp (append xs ys == xs <> ys)
+           $ "Test failed:\nappend " <> show xs <> " " <> show ys
+           <> "\nis not equal to\n" <> show (xs <> ys)
 
      describe "`reverse`" do
        it "has `reverse`" do

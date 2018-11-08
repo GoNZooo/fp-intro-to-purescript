@@ -1,8 +1,8 @@
 module NinetyNineProblems.List where
 
 import Prelude (class Eq, (+), (<>))
-import Data.Maybe (Maybe(..))
 import Data.List (List(..), (:))
+import NinetyNineProblems.Maybe
 import NinetyNineProblems.Helpers (undefined)
 
 -- A list can be either:
@@ -73,6 +73,12 @@ sum = undefined
 -- | Find the number of elements of a list.
 length :: forall a. List a -> Int
 length = undefined
+
+-- | Append a list XS to a list YS and return a new list where all the elements
+-- | of XS are immediately followed by the entire list YS.
+append :: forall a. List a -> List a -> List a
+append Nil ys = ys
+append (x : xs) ys = x : append xs ys
 
 -- | Reverse a list.
 reverse :: forall a. List a -> List a

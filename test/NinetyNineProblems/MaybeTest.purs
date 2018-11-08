@@ -2,11 +2,9 @@ module NinetyNineProblems.MaybeTest where
 
 import NinetyNineProblems.Maybe
 
-import Data.Maybe (Maybe(..))
-import Prelude (Unit, show, ($), (/), (<>), (==), (/=), discard)
+import Prelude (Unit, show, ($), (/), (<>), (==), (/=), (+), discard)
 import Test.QuickCheck (withHelp)
 import Test.Spec (describe, it, Spec)
-import Test.Spec.Assertions (shouldEqual)
 import Test.Spec.QuickCheck (quickCheck)
 
 maybeSpec :: Spec Unit
@@ -27,20 +25,35 @@ maybeSpec = do
             <> "\nis not equal to: false"
             <> "\nInstead: " <> show (isJust Nothing)
 
-     describe "`maybe`" do
+     describe "`fromMaybe`" do
         it "returns `a` for `Just a`" do
            quickCheck $ \(a :: Int) (default :: Int) ->
-             withHelp (maybe default (Just a) == a)
-             $ "Test failed:\nmaybe " <> show default <> " " <> show (Just a)
+             withHelp (fromMaybe default (Just a) == a)
+             $ "Test failed:\nfromMaybe " <> show default <> " " <> show (Just a)
             <> "\nis not equal to: " <> show a
-            <> "\nInstead: " <> show (maybe default (Just a))
+            <> "\nInstead: " <> show (fromMaybe default (Just a))
 
         it "returns `default` for `Nothing" do
            quickCheck $ \(default :: Int) ->
-             withHelp (maybe default Nothing == default)
-             $ "Test failed:\nmaybe " <> show default <> " Nothing"
+             withHelp (fromMaybe default Nothing == default)
+             $ "Test failed:\nfromMaybe " <> show default <> " Nothing"
             <> "\nis not equal to: " <> show default
-            <> "\nInstead: " <> show (maybe default Nothing)
+            <> "\nInstead: " <> show (fromMaybe default Nothing)
+
+     describe "`maybe`" do
+        it "returns `a` for `Just a`" do
+           quickCheck $ \(a :: Int) ->
+             withHelp (maybe (_ + 1) (Just a) == (Just (a + 1)))
+             $ "Test failed:\nmaybe (_ + 1) " <> show (Just a)
+            <> "\nis not equal to: (Just " <> show (a + 1) <> ")"
+            <> "\nInstead: " <> show (maybe (_ + 1) (Just a))
+
+        it "returns `Nothing` for `Nothing" do
+           quickCheck $ \(a :: Boolean) ->
+             withHelp (maybe (_ + 1) Nothing == Nothing)
+             $ "Test failed:\nmaybe (_ + 1) Nothing"
+            <> "\nis not equal to: Nothing"
+            <> "\nInstead: " <> show (maybe (_ + 1) Nothing)
 
      describe "`divide`" do
        it "returns `Nothing` when dividing by zero" do
@@ -50,7 +63,7 @@ maybeSpec = do
             <> "\nis not equal to: Nothing"
             <> "\nInstead: " <> show (divide a 0)
 
-       it "dose integer divison properly" do
+       it "does integer divison properly" do
           quickCheck $ \(a :: Int) (b :: Int) ->
             withHelp ((if b /= 0 then Just (a / b) else Nothing) == divide a b)
             $ "Test failed:\ndivide " <> show a <> " " <> show b
