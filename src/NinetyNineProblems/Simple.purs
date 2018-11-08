@@ -105,6 +105,16 @@ sign'' x =
     y ->
       -1
 
+-- | Define a function that takes two arguments but always returns the first
+-- | argument: `const 3 1 = 3`
+const :: forall a b. a -> b -> a
+const = undefined
+
+-- | Define a function that always returns its one argument.
+-- | `id 3 = 3`
+id :: forall a. a -> a
+id = undefined
+
 -- | Here is a contrived but better example of where we want to do a case
 -- | analysis on the result of something and bind the result to a name so that
 -- | we can use it when going forward. It also displays how you handle cases
