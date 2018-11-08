@@ -162,19 +162,9 @@ applyTwice = undefined
 -- | This is a very common way to combine two or more functions in order to
 -- | create a new one.
 applyFAndG :: forall a b c. (b -> c) -> (a -> b) -> a -> c
-applyFAndG f g x = f (g x)
+applyFAndG = undefined
 
 -- | Return the subtraction of a Number A and B, but where the function F
 -- | is run on the number B first.
 subtractWithFunction :: Int -> Int -> (Int -> Int) -> Int 
 subtractWithFunction = undefined
-
--- | Define a function that takes two arguments but always returns the first
--- | argument: `const 3 1 = 3`
-const :: forall a b. a -> b -> a
-const = undefined
-
--- | Define a function that always returns its one argument.
--- | `id 3 = 3`
-id :: forall a. a -> a
-id = undefined
