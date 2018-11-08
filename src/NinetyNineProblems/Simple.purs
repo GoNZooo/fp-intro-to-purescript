@@ -158,3 +158,13 @@ applyFAndG f g x = f (g x)
 -- | is run on the number B first.
 subtractWithFunction :: Int -> Int -> (Int -> Int) -> Int 
 subtractWithFunction = undefined
+
+-- | Define a function that takes two arguments but always returns the first
+-- | argument: `const 3 1 = 3`
+const :: forall a b. a -> b -> a
+const = undefined
+
+-- | Define a function that always returns its one argument.
+-- | `id 3 = 3`
+id :: forall a. a -> a
+id = undefined

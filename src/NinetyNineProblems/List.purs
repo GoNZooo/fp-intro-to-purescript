@@ -70,16 +70,6 @@ map = undefined
 sum :: List Int -> Int
 sum = undefined
 
--- | Define a function that takes two arguments but always returns the first
--- | argument: `const 3 1 = 3`
-const :: forall a b. a -> b -> a
-const = undefined
-
--- | Define a function that always returns its one argument.
--- | `id 3 = 3`
-id :: forall a. a -> a
-id = undefined
-
 -- | Find the number of elements of a list.
 length :: forall a. List a -> Int
 length = undefined
