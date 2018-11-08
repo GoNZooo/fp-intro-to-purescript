@@ -77,8 +77,7 @@ length = undefined
 -- | Append a list XS to a list YS and return a new list where all the elements
 -- | of XS are immediately followed by the entire list YS.
 append :: forall a. List a -> List a -> List a
-append Nil ys = ys
-append (x : xs) ys = x : append xs ys
+append = undefined
 
 -- | Reverse a list.
 reverse :: forall a. List a -> List a

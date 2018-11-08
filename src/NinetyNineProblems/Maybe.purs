@@ -30,8 +30,7 @@ fromMaybe = undefined
 -- | `mapMaybe (_ + 42) (Just 3) = Just 45`
 -- | `mapMaybe (_ + 42) Nothing = Nothing`
 maybe :: forall a b. (a -> b) -> Maybe a -> Maybe b
-maybe f (Just a) = Just (f a)
-maybe _ Nothing = Nothing
+maybe = undefined
 
 -- | Return the result of dividing two numbers A and B, returning `Nothing` if
 -- | b is equal to 0. Note that because this is integer division results will
