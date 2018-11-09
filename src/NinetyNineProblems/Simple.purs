@@ -1,7 +1,7 @@
 module NinetyNineProblems.Simple where
 
 import Data.Int (even)
-mport NinetyNineProblems.Helpers (undefined)
+import NinetyNineProblems.Helpers (undefined)
 import Prelude (gcd, negate, otherwise, (*), (+), (-), (<<<), (==), (>), (>=))
 
 -- Programming is mostly about applying functions to values and getting some
