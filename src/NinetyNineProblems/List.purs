@@ -4,7 +4,8 @@ import NinetyNineProblems.Maybe
 
 import Data.List (List(..), (:))
 import NinetyNineProblems.Helpers (undefined)
-import Prelude (class Eq, const, otherwise, (+), (-), (<<<), (<>), (==), (>), (>=))
+import Prelude (class Eq, const, otherwise, (+), (-), (<<<), (<>), (==), (>),
+                (>=))
 
 -- A list can be either:
 -- The empty list, there are no elements in this list: `Nil` 
