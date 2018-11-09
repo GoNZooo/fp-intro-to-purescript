@@ -1,9 +1,10 @@
 module NinetyNineProblems.ListTest where
 
 import Data.Foldable as PSFoldable
-import Data.List (List(..), (:))
+import Data.List (List(..), (:), (..))
 import Data.List as PSList
-import Prelude (Unit, discard, identity, show, ($), (&&), (+), (-), (<>), (==))
+import Prelude (Unit, discard, identity, show, ($), (&&), (+), (-), (<>), (==),
+               (<=), const, flip)
 import Prelude as P
 import Test.Spec.QuickCheck (quickCheck)
 import Test.Spec (describe, it, Spec)
@@ -62,6 +63,37 @@ listSpec = do
            <> "\nis not equal to " <> show (PSList.drop n xs)
            <> "\nInstead: " <> show (drop n xs)
 
+     describe "`dropWhile`" do
+       it "drops while predicate holds true" do
+         quickCheck $ \(b :: Boolean) ->
+         let p = (_ <= 9)
+             xs = (1..10)
+           in
+           withHelp (dropWhile p xs == PSList.dropWhile p xs)
+           $ "Test failed: dropWhile (_ <= 9) (1..10)"
+           <> "\nis not equal to (10 : Nil)"
+           <> "\nInstead: " <> show (dropWhile p xs)
+
+       it "drops nothing on false" do
+         quickCheck $ \(b :: Boolean) ->
+         let p = const false
+             xs = (1..10)
+           in
+           withHelp (dropWhile p xs == xs)
+           $ "Test failed: dropWhile (const false) (1..10)"
+           <> "\nis not equal to " <> show xs
+           <> "\nInstead: " <> show (dropWhile p xs)
+
+       it "drops everything on true" do
+         quickCheck $ \(b :: Boolean) ->
+         let p = const true
+             xs = (1..10)
+           in
+           withHelp (dropWhile p xs == Nil)
+           $ "Test failed: dropWhile (const true) (1..10)"
+           <> "\nis not equal to Nil"
+           <> "\nInstead: " <> show (dropWhile p xs)
+
      describe "`nth`" do
        it "returns the element at position N" do
          quickCheck $ \n (xs :: List Int) ->
@@ -75,6 +107,20 @@ listSpec = do
            <> "\nis not equal to\n"
            <> show (PSList.head (PSList.drop n xs))
            <> "\nInstead: " <> show (nth n xs)
+
+     describe "`foldr`" do
+       it "returns the same list on `foldr (:) xs`" do
+         quickCheck $ \(xs :: List Int) ->
+           withHelp (foldr (:) Nil xs == xs)
+           $ "Test failed:\nfoldr (:) Nil" <> show xs
+           <> "\n" <> "List should be the same as before."
+
+     describe "`foldl`" do
+       it "reverses the list when using flipped `:`" do
+         quickCheck $ \(xs :: List Int) ->
+           withHelp (foldl (flip (:)) Nil xs == PSList.reverse xs)
+           $ "Test failed:\nfoldl (:) Nil" <> show xs
+           <> "\n" <> "List should be the same as before."
 
      describe "`map`" do
        it "returns the same list on `map identity xs`" do

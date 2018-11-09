@@ -1,9 +1,10 @@
 module NinetyNineProblems.List where
 
-import Prelude (class Eq, (+), (<>))
-import Data.List (List(..), (:))
 import NinetyNineProblems.Maybe
+
+import Data.List (List(..), (:))
 import NinetyNineProblems.Helpers (undefined)
+import Prelude (class Eq, const, otherwise, (+), (-), (<<<), (<>), (==), (>), (>=))
 
 -- A list can be either:
 -- The empty list, there are no elements in this list: `Nil` 
@@ -55,9 +56,15 @@ secondLast = undefined
 drop :: forall a. Int -> List a -> List a
 drop = undefined
 
+-- | Drop elements from the start of a list until a predicate P no longer holds
+-- | true.
+-- | `dropWhile (_ < 9) (1..10) = (9 : 10 : Nil)`
+dropWhile :: forall a. (a -> Boolean) -> List a -> List a
+dropWhile = undefined
+
 -- | Find the N'th element of a list, maybe returning a result depending on
 -- | whether or not there are N or more elements in the list. If N is a
--- | negative number, return the first element.
+-- | negative number, or bigger than the length of the list, return `Nothing`.
 nth :: forall a. Int -> List a -> Maybe a
 nth = undefined
 
@@ -82,6 +89,12 @@ append = undefined
 -- | Reverse a list.
 reverse :: forall a. List a -> List a
 reverse = undefined
+
+foldr :: forall a b. (a -> b -> b) -> b -> List a -> b
+foldr = undefined
+
+foldl :: forall a b. (b -> a -> b) -> b -> List a -> b
+foldl = undefined
 
 -- | Find out whether or not a list is a palindrome.
 isPalindrome :: forall a. Eq a => List a -> Boolean
