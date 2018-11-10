@@ -15,7 +15,8 @@
     "purescript-unsafe-coerce": "^4.0.0",
     "purescript-quickcheck": "^5.0.0",
     "purescript-foldable-traversable": "^4.1.0",
-    "purescript-spec-quickcheck": "^3.0.0"
+    "purescript-spec-quickcheck": "^3.0.0",
+    "purescript-yargs": "^4.0.0"
   },
   "devDependencies": {
     "purescript-psci-support": "^4.0.0",

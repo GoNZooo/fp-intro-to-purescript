@@ -2,5 +2,8 @@
   "name": "fp-intro-with-purescript",
   "scripts": {
     "pscid": "pscid --censor-codes UnusedExplicitImport,UnusedImport"
+  },
+  "dependencies": {
+    "yargs": "^12.0.2"
   }
 }

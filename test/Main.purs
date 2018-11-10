@@ -1,16 +1,42 @@
 module Test.Main where
 
+import Prelude
+
+import Data.Array (head)
+import Data.Either (Either(..))
+import Data.Maybe (Maybe(..))
+import Effect (Effect)
+import Effect.Class.Console (log)
 import NinetyNineProblems.ListTest (listSpec)
 import NinetyNineProblems.MaybeTest (maybeSpec)
 import NinetyNineProblems.RecursionTest (recursionSpec)
-
-import Effect (Effect)
-import Prelude (Unit, discard)
+import Node.Yargs.Applicative (runY, yarg)
+import Node.Yargs.Setup (example, usage)
 import Test.Spec.Reporter.Console (consoleReporter)
 import Test.Spec.Runner (run)
 
 main :: Effect Unit
-main = run [consoleReporter] do
-  recursionSpec
-  maybeSpec
-  listSpec
+main =
+  let setup = usage "<pulp test> -t TestID -t TestID2"
+              <> example "<pulp test> -t List -t Maybe" "Specify which tests to run"
+  in
+    runY setup $ (\args -> if args == []
+                           then runTests Nothing
+                           else runTests (head args)) 
+      <$> yarg "t" ["test"] (Just "A test to run")
+                            (Left [])
+                            false
+
+runTests :: Maybe String -> Effect Unit
+runTests Nothing = do
+    run [consoleReporter] do
+      recursionSpec
+      maybeSpec
+      listSpec
+runTests (Just test) = runOneTest test
+
+runOneTest :: String -> Effect Unit
+runOneTest "maybe" = run [consoleReporter] maybeSpec
+runOneTest "list" = run [consoleReporter] listSpec
+runOneTest "recursion" = run [consoleReporter] recursionSpec
+runOneTest test = log $ "Unknown test specified: " <> test
