@@ -1,18 +1,17 @@
+-- | Programming is mostly about applying functions to values and getting some
+-- | kind of result. We don't have to apply only one function to something, but
+-- | can specify a series of functions to apply to a value, or sometimes apply
+-- | one function *or* the other.
+--
+-- | In order to get familiar with how PureScript allows you to translate this
+-- | concept into code, this module serves as an introduction to how one applies
+-- | functions to values and how we specify a function's type, as well as how
+-- | this affects things like not supplying every value to the function.
 module NinetyNineProblems.Simple where
 
 import Data.Int (even)
 import NinetyNineProblems.Helpers (undefined)
 import Prelude (gcd, negate, otherwise, (*), (+), (-), (<<<), (==), (>), (>=))
-
--- Programming is mostly about applying functions to values and getting some
--- kind of result. We don't have to apply only one function to something, but
--- can specify a series of functions to apply to a value, or sometimes apply
--- one function *or* the other.
---
--- In order to get familiar with how PureScript allows you to translate this
--- concept into code, this module serves as an introduction to how one applies
--- functions to values and how we specify a function's type, as well as how
--- this affects things like not supplying every value to the function.
 
 -- | Return the addition of two numbers A and B.
 -- | The type signature (after `::`) says that we take an integer as a first
@@ -28,7 +27,7 @@ add' a b = (+) a b
 
 -- | Here we take advantage of the fact that these definitions are exactly the
 -- | same and we can now drop the arguments entirely, simply saying that
--- | `addAgain''` is equal to `(+)`.
+-- | `addAgain` is equal to `(+)`.
 addAgain :: Int -> Int -> Int
 addAgain = (+)
 
@@ -40,9 +39,11 @@ addAgain' a b = a `add` b
 
 -- | When we don't supply all arguments to a function we effectively get what
 -- | is left of the type signature. An example:
--- | `add5 6` = 11
+-- | ```
+-- | add5 6 = 11
 -- | add :: Int -> Int -> Int
 -- | add5 ::       Int -> Int
+-- | ```
 -- | Note the relation between us giving the first argument and in return
 -- | getting a function representing the rest of the computation.
 -- | Don't worry if this isn't immediately clear right away, as it's something
@@ -71,7 +72,7 @@ subtractNegated :: Int -> Int -> Int
 subtractNegated = undefined
 
 -- | Return whether or not the length of a string is even.
--- | Hint: Use `String.length` to get the lengt of a string.
+-- | Hint: Use `String.length` to get the length of a string.
 stringLengthIsEven :: String -> Boolean
 stringLengthIsEven = undefined
 
@@ -109,12 +110,17 @@ sign'' x =
       -1
 
 -- | Define a function that takes two arguments but always returns the first
--- | argument: `const 3 1 = 3`
+-- | argument:
+-- | ```
+-- | const 3 1 = 3
+-- | ```
 const :: forall a b. a -> b -> a
 const = undefined
 
 -- | Define a function that always returns its one argument.
--- | `id 3 = 3`
+-- | ```
+-- | id 3 = 3
+-- | ```
 id :: forall a. a -> a
 id = undefined
 
@@ -151,13 +157,17 @@ applyTwice = undefined
 
 -- | Apply the function F after applying the function G to a value A.
 -- | Try the following usage:
+-- | ```
 -- | > add5 = applyFAndG (_ + 3) (_ + 2)
 -- | > add5 6
+-- | ```
 -- | What is the result?
 -- | Note the type signature and that you've supplied both F and G, but nothing
 -- | representing the value `a`.
+-- | ```
 -- | applyFAndG :: forall a b c. (b -> c) -> (a -> b) -> a -> c
 -- | applyFAndG ::                   f    ->     g    -> (a -> c)
+-- | ```
 -- | What is returned when you *partially* apply a function like this is the
 -- | rest of the type signature, in this case `a -> c` or `(a -> c)`, which
 -- | represents a function that takes an `a` and returns a `c`. The returned
