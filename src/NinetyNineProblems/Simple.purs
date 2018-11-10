@@ -79,11 +79,12 @@ stringLengthIsEven = undefined
 -- | what to do with it. There are a few ways to do this, appropriate for
 -- | different scenarios. Here is the simplest, but maybe least elegant:
 sign :: Int -> Int
-sign x = if x == 0
-         then 0
-         else if x > 0
-              then 1
-              else -1
+sign x =
+  if x == 0
+    then 0
+    else if x > 0
+      then 1
+      else -1
 
 -- | Here is a more elegant version that allows us to specify a list of
 -- | conditions and what the function will do when a condition is true, as
