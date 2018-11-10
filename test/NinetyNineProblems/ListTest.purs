@@ -7,9 +7,8 @@ import Data.List (List(..), (:), (..))
 import Data.List as PSList
 import NinetyNineProblems.Maybe (Maybe(..))
 import NinetyNineProblems.TestUtils (specifyEqual)
-import Prelude (Unit, join)
+import Prelude (Unit, const, discard, flip, identity, join, ($), (+), (-), (<=), (<>), (==))
 import Prelude as P
-import Test.QuickCheck (withHelp)
 import Test.Spec (describe, it, Spec)
 import Test.Spec.QuickCheck (quickCheck)
 
