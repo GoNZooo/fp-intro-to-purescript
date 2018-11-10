@@ -1,18 +1,29 @@
+-- | Lists are a central data structure in functional programming and serve as
+-- | the main abstraction for collections of things. Many languages have more
+-- | types than lists, but for the most part they all relate to lists in some way.
+-- |
+-- | Lists can only contain items of the same type, so you might have the
+-- | following types of list:
+-- | ```
+-- | List Int             -- A list of integer values
+-- | List Boolean         -- A list of boolean values
+-- | List MyDataStructure -- A list of our own custom values
+-- | ```
+-- |
+-- | A list can be either:
+-- | The empty list, there are no elements in this list: `Nil` 
+-- | An element linked to the rest of the list: `element : restOfTheList`
+--
+-- | Remember that `restOfTheList` can be `Nil`
+-- | element : (nextElement : (nextElementAfterThat : Nil))
+
 module NinetyNineProblems.List where
 
 import NinetyNineProblems.Maybe
 
 import Data.List (List(..), (:))
 import NinetyNineProblems.Helpers (undefined)
-import Prelude (class Eq, const, otherwise, (+), (-), (<<<), (<>), (==), (>),
-                (>=))
-
--- A list can be either:
--- The empty list, there are no elements in this list: `Nil` 
--- An element linked to the rest of the list: `element : restOfTheList`
---
--- Remember that `restOfTheList` can be `Nil`
--- element : (nextElement : (nextElementAfterThat : Nil))
+import Prelude (class Eq, const, otherwise, (+), (-), (<<<), (<=), (<>), (==), (>), (>=))
 
 -- | Return the first element (the head) of a list, maybe returning a result
 -- | depending on whether or not there is one element or more in the list.
@@ -90,6 +101,13 @@ append = undefined
 -- | Reverse a list.
 reverse :: forall a. List a -> List a
 reverse = undefined
+
+-- | Return a list with the same element A repeated N times.
+-- | ```
+-- | replicate 3 "ha" = ("ha" : "ha" : "ha" : Nil)
+-- | ```
+replicate :: forall a. Int -> a -> List a
+replicate = undefined
 
 foldr :: forall a b. (a -> b -> b) -> b -> List a -> b
 foldr = undefined

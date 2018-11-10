@@ -5,6 +5,7 @@ import NinetyNineProblems.List
 import Data.Foldable as PSFoldable
 import Data.List (List(..), (:), (..))
 import Data.List as PSList
+import Data.Unfoldable as PSUnfoldable
 import NinetyNineProblems.Maybe (Maybe(..))
 import NinetyNineProblems.TestUtils (specifyEqual)
 import Prelude (Unit, const, discard, flip, identity, join, ($), (+), (-), (<=), (<>), (==))
@@ -111,6 +112,11 @@ listSpec = do
       it "reverses the list" do
         quickCheck $ \(xs :: List Int) ->
           specifyEqual (reverse xs) (PSList.reverse xs)
+
+    describe "`replicate`" do
+      it "creates a list of the correct length" do
+        quickCheck $ \n (a :: Int) ->
+          specifyEqual (replicate n a) (PSUnfoldable.replicate n a)
 
     describe "`isPalindrome`" do
       it "returns true for known cases" do
