@@ -17,23 +17,22 @@ import Test.Spec.Runner (run)
 
 main :: Effect Unit
 main =
-  let setup = usage "<pulp test> -t TestID -t TestID2"
-              <> example "<pulp test> -t List -t Maybe" "Specify which tests to run"
+  let setup =
+        usage "<pulp test> -t TestID -t TestID2"
+        <> example "<pulp test> -t List -t Maybe" "Specify which tests to run"
   in
-    runY setup $ (\args -> if args == []
-                           then runTests Nothing
-                           else runTests (head args)) 
-      <$> yarg "t" ["test"] (Just "A test to run")
-                            (Left [])
-                            false
+    runY setup
+    $ (case _ of
+        [] -> runTests Nothing
+        args -> runTests (head args)) 
+    <$> yarg "t" ["test"] (Just "A test to run") (Left []) false
 
 runTests :: Maybe String -> Effect Unit
-runTests Nothing = do
-    run [consoleReporter] do
-      recursionSpec
-      maybeSpec
-      listSpec
 runTests (Just test) = runOneTest test
+runTests Nothing = run [consoleReporter] do
+  recursionSpec
+  maybeSpec
+  listSpec
 
 runOneTest :: String -> Effect Unit
 runOneTest "maybe" = run [consoleReporter] maybeSpec
