@@ -115,8 +115,8 @@ listSpec = do
 
     describe "`replicate`" do
       it "creates a list of the correct length" do
-        quickCheck $ \n (a :: Int) ->
-          specifyEqual (replicate n a) (PSUnfoldable.replicate n a)
+        quickCheck $ \(a :: Int) ->
+          specifyEqual (replicate 50 a) (PSUnfoldable.replicate 50 a)
 
     describe "`isPalindrome`" do
       it "returns true for known cases" do
