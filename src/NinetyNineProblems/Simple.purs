@@ -155,6 +155,18 @@ apply = undefined
 applyTwice :: forall a. (a -> a) -> a -> a
 applyTwice = undefined
 
+-- | Apply a function F to a value A if a predicate P holds for the result.
+applyIf :: forall a b. (a -> b) -> (a -> Boolean) -> a -> b
+applyIf = undefined
+
+-- | Apply a function F to a value A while a predicate P holds for the result.
+applyWhile :: forall a. (a -> a) -> (a -> Boolean) -> a -> a
+applyWhile = undefined
+
+-- | Apply a function F to a value A until a predicate P holds for the result.
+applyUntil :: forall a. (a -> a) -> (a -> Boolean) -> a -> a
+applyUntil = undefined
+
 -- | Apply the function F after applying the function G to a value A.
 -- | Try the following usage:
 -- | ```
