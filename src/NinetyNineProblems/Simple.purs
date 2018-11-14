@@ -10,8 +10,9 @@
 module NinetyNineProblems.Simple where
 
 import Data.Int (even)
+import Data.List (List, all, any)
 import NinetyNineProblems.Helpers (undefined)
-import Prelude (gcd, negate, otherwise, (*), (+), (-), (<<<), (==), (>), (>=))
+import Prelude (gcd, mod, negate, otherwise, (*), (+), (-), (<<<), (==), (>), (>=))
 
 -- | Return the addition of two numbers A and B.
 -- | The type signature (after `::`) says that we take an integer as a first
@@ -142,6 +143,62 @@ multiplyWithEvenCommonDivisor x =
     -- value is.
     _ ->
       x
+
+-- | Return `true`/`false` based on whether or not an integer A is divisible by
+-- | an integer B.
+-- |
+-- | Hint: `mod` can be used to return the remainder of an integer divided by
+-- | another. An integer A is divisible by an integer B when dividing A by B
+-- | gives a remainder of 0.
+isDivisibleBy :: Int -> Int -> Boolean
+isDivisibleBy = undefined
+
+-- | "Anonymous functions" are very common in functional programming. There are
+-- | several ways of creating them, but the principal most basic one is as
+-- | follows:
+-- | ```
+-- | \x -> x + 1
+-- | ```
+-- | The above example shows how to create an anonymous function that takes an
+-- | argument X and adds 1 to it.
+-- | Define a function `isDivisibleBy2` only by binding the name to an anonymous
+-- | function:
+-- | ```
+-- | isDivisibleBy2 = \i -> ...
+-- | ```
+isDivisibleBy2 :: Int -> Boolean
+isDivisibleBy2 = undefined
+-- We can create these functions anywhere that we would like and they are very
+-- commonly used when we don't need to put a name on a function, because we use
+-- it very rarely, perhaps only in one specific case, hence the name
+-- "anonymous" function.
+
+
+-- | Return `true`/`false` based on whether or not all integers in a list L are
+-- | divisible by an integer A.
+-- |
+-- | Hint: `all` from `Data.List` can be used to check whether or not all items
+-- | in a list return true for a given predicate.
+-- | For lists, `all` looks as follows:
+-- | ```
+-- | (a -> Boolean) -> List a -> Boolean
+-- | ```
+-- | That is to say, it takes a predicate on an `a`, a list of `a`s and returns
+-- | a boolean.
+-- | In this instance, `a` is an integer, so our type will be:
+-- | ```
+-- | (Int -> Boolean) -> List Int -> Boolean
+-- | ```
+allDivisibleBy :: Int -> List Int -> Boolean
+allDivisibleBy = undefined
+
+-- | Return `true`/`false` based on whether or not any integer in a list L is
+-- | divisible by an integer A.
+-- |
+-- | Hint: `any` from `Data.List` can be used to check whether or not all items
+-- | in a list return true for a given predicate.
+anyDivisibleBy :: Int -> List Int -> Boolean
+anyDivisibleBy = undefined
 
 -- | Apply a function F to a value A.
 -- | When we write `(a -> b)` this denotes a function that takes an `a` and
