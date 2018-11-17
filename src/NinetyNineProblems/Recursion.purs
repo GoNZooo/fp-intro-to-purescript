@@ -8,7 +8,7 @@
 module NinetyNineProblems.Recursion where
 
 import NinetyNineProblems.Helpers (undefined)
-import Prelude ((+), (-), (*), otherwise, (>))
+import Prelude (not, otherwise, (*), (+), (-), (>))
 
 -- | Apply a function F N times to a value A.
 applyN :: forall a. Int -> (a -> a) -> a -> a
