@@ -10,6 +10,18 @@ module NinetyNineProblems.Recursion where
 import NinetyNineProblems.Helpers (undefined)
 import Prelude ((+), (-), (*), otherwise, (>))
 
+-- | Apply a function F N times to a value A.
+applyN :: forall a. Int -> (a -> a) -> a -> a
+applyN = undefined
+
+-- | Apply a function F to a value A while a predicate P holds for the result.
+applyWhile :: forall a. (a -> a) -> (a -> Boolean) -> a -> a
+applyWhile = undefined
+
+-- | Apply a function F to a value A until a predicate P holds for the result.
+applyUntil :: forall a. (a -> a) -> (a -> Boolean) -> a -> a
+applyUntil = undefined
+
 -- | Sum all the numbers up to and including an integer N, starting at 1.
 -- | ```
 -- | sumZeroToN 5 = 15
