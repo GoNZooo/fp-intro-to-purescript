@@ -11,6 +11,7 @@ import Effect.Class.Console (log)
 import NinetyNineProblems.ListTest (listSpec)
 import NinetyNineProblems.MaybeTest (maybeSpec)
 import NinetyNineProblems.RecursionTest (recursionSpec)
+import NinetyNineProblems.SimpleTest (simpleSpec)
 import Node.Yargs.Applicative (runY, yarg)
 import Node.Yargs.Setup (example, usage)
 import Test.Spec.Reporter.Console (consoleReporter)
@@ -29,11 +30,14 @@ runTests (Just test) = runOneTest lowerCased
   lowerCased = toLower test
 
 runTests Nothing = run [consoleReporter] do
+  simpleSpec
   recursionSpec
   maybeSpec
   listSpec
 
 runOneTest :: String -> Effect Unit
+runOneTest "simple" = run [consoleReporter] simpleSpec
+
 runOneTest "maybe" = run [consoleReporter] maybeSpec
 
 runOneTest "list" = run [consoleReporter] listSpec
