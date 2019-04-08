@@ -56,10 +56,3 @@ recommended order is as follows:
    emphasizing the idea slicing up work into discrete units.
 5. `List.purs` - Introduces functions relating to linked lists and how to work
    with them in a functional context.
-
-## Note about formatting
-
-This repository uses a tool called `purty` for its code formatting. This is by
-no means my favorite formatting and it may look odd to you, but I made the
-decision to use a formatter because while it may not be the formatting choice I
-would've made, it's instead a standardized choice made for us.
