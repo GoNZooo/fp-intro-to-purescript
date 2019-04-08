@@ -20,6 +20,10 @@ yarn
 yarn bower i
 ```
 
+Make sure to also add the `"purescript.addNpmPath": true` setting in your
+settings if you're using VSCode, as your PureScript installation won't be
+picked up correctly from `node_modules` otherwise.
+
 ## Layout
 
 Each module is structured more or less as a series of functions to implement.
@@ -32,6 +36,9 @@ Running `yarn test` will run the tests for the project and running
 If you want to run only the tests for a certain file in watch mode, run
 `yarn test:watch -- -- -t List` where "List" can also be "Maybe" or "Recursion"
 as the tests are split up into the modules that they cover.
+
+If you want to run only one test in watch mode, you can run
+`yarn pulp -- -w test -- -t simple`, for example.
 
 ## Exercise order
 
