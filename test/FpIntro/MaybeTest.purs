@@ -1,8 +1,8 @@
-module NinetyNineProblems.MaybeTest where
+module FpIntro.MaybeTest where
 
-import NinetyNineProblems.Maybe
+import FpIntro.Maybe
 
-import NinetyNineProblems.TestUtils (specifyEqual)
+import FpIntro.TestUtils (specifyEqual)
 import Prelude (Unit, discard, ($), (+), (/), (/=))
 import Test.Spec (describe, it, Spec)
 import Test.Spec.QuickCheck (quickCheck)

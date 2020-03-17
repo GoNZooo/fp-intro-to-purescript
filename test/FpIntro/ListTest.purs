@@ -1,10 +1,10 @@
-module NinetyNineProblems.ListTest where
+module FpIntro.ListTest where
 
-import NinetyNineProblems.List
+import FpIntro.List
 
 import Data.List (List(..), (:), (..))
-import NinetyNineProblems.Maybe (Maybe(..))
-import NinetyNineProblems.TestUtils (specifyEqual)
+import FpIntro.Maybe (Maybe(..))
+import FpIntro.TestUtils (specifyEqual)
 import Prelude
   ( Unit
   , const

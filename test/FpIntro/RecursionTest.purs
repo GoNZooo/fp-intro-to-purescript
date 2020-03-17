@@ -1,16 +1,16 @@
-module NinetyNineProblems.RecursionTest where
+module FpIntro.RecursionTest where
 
 import Prelude
 
 import Data.List ((..))
-import NinetyNineProblems.Recursion
+import FpIntro.Recursion
   ( applyN
   , applyWhile
   , applyUntil
   , multiplyOneToN
   , sumZeroToN
   )
-import NinetyNineProblems.TestUtils (specifyEqual)
+import FpIntro.TestUtils (specifyEqual)
 import Test.Spec (describe, it, Spec)
 import Test.Spec.QuickCheck (quickCheck')
 

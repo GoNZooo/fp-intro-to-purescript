@@ -17,12 +17,18 @@ Run the following in order to set the project up:
 
 ```bash
 yarn
-yarn bower i
+yarn spago build
 ```
 
-Make sure to also add the `"purescript.addNpmPath": true` setting in your
-settings if you're using VSCode, as your PureScript installation won't be
-picked up correctly from `node_modules` otherwise.
+If you are running VSCode, add the following options in your preferences, either
+for the workspace or your general install (as they are generally useful):
+
+```json
+"purescript.addSpagoSources": true,
+"purescript.addNpmPath": true,
+"purescript.buildCommand": "spago build --no-install --purs-args '--json-errors'",
+"purescript.editorMode": true,
+```
 
 ## Layout
 
@@ -33,12 +39,12 @@ Each module is structured more or less as a series of functions to implement.
 Running `yarn test` will run the tests for the project and running
 `yarn test:watch` will make sure that the tests are re-run when files change.
 
-If you want to run only the tests for a certain file in watch mode, run
-`yarn test:watch -- -- -t List` where "List" can also be "Maybe" or "Recursion"
-as the tests are split up into the modules that they cover.
+If you want to run only the tests for a certain file, run
+`yarn test -- -a '-t simple'` where "simple" can also be "maybe", "list"
+or "recursion" as the tests are split up into the modules that they cover.
 
-If you want to run only one test in watch mode, you can run
-`yarn pulp -- -w test -- -t simple`, for example.
+If you want to run only the tests for a certain file in **watch mode**, run
+`yarn test:watch -- -a '-t simple'`.
 
 ## Exercise order
 

@@ -1,4 +1,4 @@
-module NinetyNineProblems.TestUtils
+module FpIntro.TestUtils
   (
     specifyEqual
   )

@@ -9,13 +9,13 @@
 -- | What we end up with is a much safer paradigm where we state with clear
 -- | intent for the compiler, but most importantly, our fellow programmers, that
 -- | we have a plan for success and failure.
-module NinetyNineProblems.Maybe where
+module FpIntro.Maybe where
 
-import NinetyNineProblems.Helpers (undefined)
-import Prelude (otherwise, (/), (>), (==), class Show, class Eq, show, (<>))
+import FpIntro.Helpers (undefined)
+import Prelude ((==), class Show, class Eq, show, (<>))
 
-data Maybe a
-  = Just a
+data Maybe a =
+  Just a
   | Nothing
 
 -- | Return `true` when a `Maybe` is `Nothing` and `false` when it's
@@ -24,10 +24,7 @@ data Maybe a
 -- | isNothing Nothing = true
 -- | isNothing (Just 5) = false
 -- | ```
-isNothing ::
-  forall a.
-  Maybe a ->
-  Boolean
+isNothing :: forall a. Maybe a -> Boolean
 isNothing (Just _) = false
 
 isNothing Nothing = true
@@ -38,10 +35,7 @@ isNothing Nothing = true
 -- | isJust Nothing = false
 -- | isJust (Just 5) = true
 -- | ```
-isJust ::
-  forall a.
-  Maybe a ->
-  Boolean
+isJust :: forall a. Maybe a -> Boolean
 isJust = undefined
 
 -- | Return `something` when a `Maybe` is `Just something` and another value
@@ -50,11 +44,7 @@ isJust = undefined
 -- | fromMaybe 42 (Just 5) = 5
 -- | fromMaybe 42 Nothing = 42
 -- | ```
-fromMaybe ::
-  forall a.
-  a ->
-  Maybe a ->
-  a
+fromMaybe :: forall a. a -> Maybe a -> a
 fromMaybe = undefined
 
 -- | Modify the `something` inside a `Maybe` when it's there via a function F;
@@ -63,11 +53,7 @@ fromMaybe = undefined
 -- | mapMaybe (_ + 42) (Just 3) = Just 45
 -- | mapMaybe (_ + 42) Nothing = Nothing
 -- | ```
-maybe ::
-  forall a b.
-  (a -> b) ->
-  Maybe a ->
-  Maybe b
+maybe :: forall a b. (a -> b) -> Maybe a -> Maybe b
 maybe = undefined
 
 -- | Return the result of dividing two numbers A and B, returning `Nothing` if
@@ -78,10 +64,7 @@ maybe = undefined
 -- | divide  1 2 = Just 0
 -- | divide 10 0 = Nothing
 -- | ```
-divide ::
-  Int ->
-  Int ->
-  Maybe Int
+divide :: Int -> Int -> Maybe Int
 divide = undefined
 
 --------------------------------------------------------------------------------

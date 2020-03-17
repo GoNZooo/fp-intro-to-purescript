@@ -7,14 +7,13 @@
 -- | concept into code, this module serves as an introduction to how one applies
 -- | functions to values and how we specify a function's type, as well as how
 -- | this affects things like not supplying every value to the function.
-module NinetyNineProblems.Simple where
+module FpIntro.Simple where
+
+import Prelude hiding (add)
 
 import Data.Int (even)
-import Data.List (List, all, any)
-import Data.List as List
-import Data.String as String
-import NinetyNineProblems.Helpers (undefined)
-import Prelude (gcd, mod, negate, otherwise, (*), (+), (-), (<), (<<<), (==), (>), (>=))
+import Data.List (List)
+import FpIntro.Helpers (undefined)
 
 -- | Return the addition of two numbers A and B.
 -- | The type signature (after `::`) says that we take an integer as a first

@@ -7,41 +7,53 @@ import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
 import Data.String (toLower)
 import Effect (Effect)
+import Effect.Aff (Aff)
+import Effect.Aff as Aff
 import Effect.Class.Console (log)
-import NinetyNineProblems.ListTest (listSpec)
-import NinetyNineProblems.MaybeTest (maybeSpec)
-import NinetyNineProblems.RecursionTest (recursionSpec)
-import NinetyNineProblems.SimpleTest (simpleSpec)
+import FpIntro.ListTest (listSpec)
+import FpIntro.MaybeTest (maybeSpec)
+import FpIntro.RecursionTest (recursionSpec)
+import FpIntro.SimpleTest (simpleSpec)
 import Node.Yargs.Applicative (runY, yarg)
 import Node.Yargs.Setup (example, usage)
 import Test.Spec.Reporter.Console (consoleReporter)
-import Test.Spec.Runner (run)
+import Test.Spec.Runner (runSpec)
 
 main :: Effect Unit
-main = let setup = usage "<pulp test> -t TestID -t TestID2" <> example "<pulp test> -t List -t Maybe" "Specify which tests to run"
-       in runY setup $ (case _ of
-         [] -> runTests Nothing
-         args -> runTests (head args)) <$> yarg "t" [ "test"
-                                                    ] (Just "A test to run") (Left []) false
+main =
+  let
+    setup =
+      usage "<spago test> -t TestID -t TestID2" <> example "<spago test> -t List -t Maybe" "Specify which tests to run"
+  in
+    runY setup $
+      (case _ of
+         [] ->
+           Aff.launchAff_ $ runTests Nothing
+         args ->
+           Aff.launchAff_ $
+             runTests (head args)) <$> yarg "t" ["test"]
+                                                (Just "A test to run")
+                                                (Left [])
+                                                false
 
-runTests :: Maybe String -> Effect Unit
+runTests :: Maybe String -> Aff Unit
 runTests (Just test) = runOneTest lowerCased
   where
   lowerCased = toLower test
 
-runTests Nothing = run [consoleReporter] do
+runTests Nothing = runSpec [consoleReporter] do
   simpleSpec
   recursionSpec
   maybeSpec
   listSpec
 
-runOneTest :: String -> Effect Unit
-runOneTest "simple" = run [consoleReporter] simpleSpec
+runOneTest :: String -> Aff Unit
+runOneTest "simple" = runSpec [consoleReporter] simpleSpec
 
-runOneTest "maybe" = run [consoleReporter] maybeSpec
+runOneTest "maybe" = runSpec [consoleReporter] maybeSpec
 
-runOneTest "list" = run [consoleReporter] listSpec
+runOneTest "list" = runSpec [consoleReporter] listSpec
 
-runOneTest "recursion" = run [consoleReporter] recursionSpec
+runOneTest "recursion" = runSpec [consoleReporter] recursionSpec
 
 runOneTest test = log $ "Unknown test specified: " <> test

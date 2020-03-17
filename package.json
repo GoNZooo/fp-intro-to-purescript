@@ -1,19 +1,16 @@
 {
   "name": "fp-intro-with-purescript",
   "scripts": {
-    "build": "pulp build",
-    "build:watch": "pulp --watch build",
-    "pscid": "pscid --censor-codes UnusedExplicitImport,UnusedImport",
-    "test": "pulp test",
-    "test:watch": "pulp --watch test"
+    "build": "spago build",
+    "build:watch": "spago build --watch",
+    "test": "spago test",
+    "test:watch": "spago test --watch"
   },
   "dependencies": {
     "yargs": "^12.0.2"
   },
   "devDependencies": {
-    "bower": "^1.8.8",
-    "pulp": "^12.3.1",
-    "purescript": "^0.12.3",
-    "request": "^2.88.0"
+    "purescript": "^0.13.6",
+    "spago": "^0.14.0"
   }
 }

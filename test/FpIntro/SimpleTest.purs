@@ -1,4 +1,4 @@
-module NinetyNineProblems.SimpleTest
+module FpIntro.SimpleTest
 
 where
 
@@ -7,8 +7,8 @@ import Prelude
 import Data.Foldable as List
 import Data.Int (even)
 import Data.String as String
-import NinetyNineProblems.Simple as Simple
-import NinetyNineProblems.TestUtils (specifyEqual)
+import FpIntro.Simple as Simple
+import FpIntro.TestUtils (specifyEqual)
 import Test.Spec (Spec, describe, it)
 import Test.Spec.QuickCheck (quickCheck)
 
