@@ -1,0 +1,38 @@
+module FpIntro.Exercises.Exercise1
+
+where
+
+import Data.List (List)
+import FpIntro.Helpers (undefined)
+
+data Profession =
+  Teacher
+  | SoftwareDeveloper
+  | Nurse
+  | Other
+
+newtype Person =
+  Person
+    { age :: Int
+    , profession :: Profession
+    }
+
+-- Write a function that gets an age and a list of people and returns all the
+-- people above or equal to that age.
+aboveAge :: Int -> List Person
+aboveAge = undefined
+
+-- Write a function that gets an age and a list of people and returns all the
+-- people below that age.
+belowAge :: Int -> List Person
+belowAge = undefined
+
+-- Write a function that gets a profession and a list of people and returns all
+-- the people who have that profession.
+haveProfession :: Profession -> List Person
+haveProfession = undefined
+
+-- Write a function that gets a list of professions and a list of people and
+-- returns all the people who have any of those professions.
+haveAnyOfProfessions :: Profession -> List Person
+haveAnyOfProfessions = undefined
