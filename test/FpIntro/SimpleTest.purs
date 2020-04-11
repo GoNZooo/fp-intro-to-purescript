@@ -45,16 +45,6 @@ simpleSpec = do
         quickCheck \s ->
           specifyEqual (Simple.stringLengthIsEven s) (even (String.length s))
 
-    describe "`const`" do
-      it "works with `identity`" $
-        quickCheck \(a :: Int) (b :: Int) ->
-          specifyEqual (Simple.const a b) a
-
-    describe "`id`" do
-      it "returns the passed argument" $
-        quickCheck \(a :: Int) ->
-          specifyEqual (Simple.id a) a
-
     describe "`isDivisibleBy`" do
       it "checks whether or not `a` is divisible by `b`" $
         quickCheck \a b ->
@@ -74,58 +64,4 @@ simpleSpec = do
       it "checks whether or not any item is divisble by `a`" $
         quickCheck \a as ->
           specifyEqual (Simple.anyDivisibleBy a as) (List.any (\x -> x `mod` a == 0) as)
-
-    describe "`apply`" do
-      it "applies identity correctly" $
-        quickCheck \(a :: Int) ->
-          specifyEqual (Simple.apply identity a) a
-
-      it "applies const correctly" $
-        quickCheck \(a :: Int) (b :: Int) ->
-          specifyEqual (Simple.apply (const b) a) b
-
-      it "applies addition correctly" $
-        quickCheck \(a :: Int) (b :: Int) ->
-          specifyEqual (Simple.apply (_ + b) a) (a + b)
-
-    describe "`applyTwice`" do
-      it "applies identity correctly" $
-        quickCheck \(a :: Int) ->
-          specifyEqual (Simple.applyTwice identity a) a
-
-      it "applies const correctly" $
-        quickCheck \(a :: Int) (b :: Int) ->
-          specifyEqual (Simple.applyTwice (const b) a) b
-
-      it "applies addition correctly" $
-        quickCheck \(a :: Int) (b :: Int) ->
-          specifyEqual (Simple.applyTwice (_ + b) a) (a + b + b)
-
-    describe "`applyIf`" do
-      it "applies identity correctly" $
-        quickCheck \(a :: Int) ->
-          specifyEqual (Simple.applyIf identity even a) a
-
-      it "applies const correctly" $
-        quickCheck \(a :: Int) (b :: Int) ->
-          specifyEqual (Simple.applyIf (const b) even a) (if even a then b else a)
-
-      it "applies addition correctly" $
-        quickCheck \(a :: Int) (b :: Int) ->
-          specifyEqual (Simple.applyIf (_ + b) even a) (if even a then a + b else a)
-
-    describe "`applyFAndG`" do
-      it "applies identity correctly" $
-        quickCheck \(a :: Int) ->
-          specifyEqual (Simple.applyFAndG identity identity a) a
-
-      it "applies const correctly" $
-        quickCheck \(a :: Int) (b :: Int) ->
-          specifyEqual (Simple.applyFAndG (const b) even a) b
-
-      it "applies addition correctly" $
-        quickCheck \(a :: Int) (b :: Int) ->
-          specifyEqual (Simple.applyFAndG even (_ + b) a)
-                       (if even (a + b) then true else false)
-
 
