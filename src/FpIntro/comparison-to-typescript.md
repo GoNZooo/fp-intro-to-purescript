@@ -119,7 +119,7 @@ const heightOf = (element: OurElement | null): number => {
 In newer TypeScript versions you can also write:
 
 ```typescript
-export const heightOf = (element: OurElement | null): number => {
+const heightOf = (element: OurElement | null): number => {
   // The element is first checked for `null`. If it's `null` the entire
   // `element?.height` expression will be `null`. If it is, the `??` operator
   // will make the full expression return 0.
