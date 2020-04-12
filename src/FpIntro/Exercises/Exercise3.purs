@@ -22,11 +22,11 @@ newtype Discounts
   , regular :: Offer
   }
 
-data Offer
+newtype Offer
   = Offer
-    { people :: AmountOfPeople
-    , percentage :: DiscountPercentage
-    }
+  { people :: AmountOfPeople
+  , percentage :: DiscountPercentage
+  }
 
 newtype AmountOfPeople
   = AmountOfPeople Int
