@@ -8,14 +8,15 @@ module FpIntro.Bool where
 import FpIntro.Helpers (undefined)
 import Prelude (class Show)
 
-data Bool =
-  True
+data Bool
+  = True
   | False
 
 -- | Create a function that takes a boolean value B. If the value is `True`,
 -- | return `False` and if it's `False`, return `True`.
 not :: Bool -> Bool
 not True = False
+
 not False = True
 
 -- | Create a function that takes two boolean values A and B. If both are `True`

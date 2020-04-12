@@ -10,7 +10,6 @@
 module FpIntro.Simple where
 
 import Prelude hiding (add)
-
 import Data.Int (even)
 import Data.List (List)
 import FpIntro.Helpers (undefined)
@@ -52,11 +51,13 @@ stringLengthIsEven = undefined
 -- | different scenarios. Here is the simplest, but maybe least elegant:
 sign :: Int -> Int
 sign x =
-  if x == 0
-    then 0
-    else if x > 0
-      then 1
-      else -1
+  if x == 0 then
+    0
+  else
+    if x > 0 then
+      1
+    else
+      -1
 
 -- | Here is a more elegant version that allows us to specify a list of
 -- | conditions and what the function will do when a condition is true, as
@@ -71,11 +72,12 @@ sign' x
 -- | but works very well when one wants to run a function on a value and do
 -- | a case analysis of the result.
 sign'' :: Int -> Int
-sign'' x =
-  case x of
-    y | y == 0 -> 0
-    y | y > 0 -> 1
-    y -> -1
+sign'' x = case x of
+  y
+    | y == 0 -> 0
+  y
+    | y > 0 -> 1
+  y -> -1
 
 -- | Here is a contrived but better example of where we want to do a case
 -- | analysis on the result of something and bind the result to a name so that
@@ -83,17 +85,15 @@ sign'' x =
 -- | where the returned value doesn't matter to you, if all previous cases
 -- | are not matching.
 multiplyWithEvenCommonDivisor :: Int -> Int
-multiplyWithEvenCommonDivisor x =
-  case gcd x 100 of
+multiplyWithEvenCommonDivisor x = case gcd x 100 of
   -- We bind the result of `gcd x 100` to the name `divisor` and check
   -- whether or not it's even (`| even divisor`) and if it is, we return
-  divisor | even divisor ->
-    x * divisor
+  divisor
+    | even divisor -> x * divisor
   -- We aren't using the divisor here so we don't need to care about giving
   -- this case a name. Instead we use `_`, which means we don't care what the
   -- value is.
-  _ ->
-    x
+  _ -> x
 
 -- | Return `true`/`false` based on whether or not an integer A is divisible by
 -- | an integer B.

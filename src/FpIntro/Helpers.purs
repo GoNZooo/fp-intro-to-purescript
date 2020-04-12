@@ -1,7 +1,6 @@
 module FpIntro.Helpers (error, todo, undefined) where
 
 import Prelude
-
 import Effect.Exception.Unsafe (unsafeThrow)
 import Unsafe.Coerce (unsafeCoerce)
 

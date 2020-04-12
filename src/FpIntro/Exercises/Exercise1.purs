@@ -1,9 +1,6 @@
-module FpIntro.Exercises.Exercise1
-
-where
+module FpIntro.Exercises.Exercise1 where
 
 import Prelude
-
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
 import Data.List (List)
@@ -39,25 +36,27 @@ import FpIntro.Helpers (undefined)
 -- function to have, then `->` and the function body. This is analogous to doing
 -- the following in JavaScript:
 -- `(parameter1, parameter2) => doingSomethingWith(parameter2, parameter1)`
-
-data Profession =
-  Teacher
+data Profession
+  = Teacher
   | SoftwareDeveloper
   | Nurse
   | Other
 
 derive instance eqProfession :: Eq Profession
+
 derive instance genericProfession :: Generic Profession _
+
 instance showProfession :: Show Profession where
   show = genericShow
 
-newtype Person =
-  Person
-    { age :: Int
-    , profession :: Profession
-    }
+newtype Person
+  = Person
+  { age :: Int
+  , profession :: Profession
+  }
 
 derive instance genericPerson :: Generic Person _
+
 instance showPerson :: Show Person where
   show = genericShow
 

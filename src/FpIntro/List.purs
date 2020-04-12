@@ -19,7 +19,6 @@
 module FpIntro.List where
 
 import FpIntro.Maybe
-
 import Data.List (List(..), (:))
 import FpIntro.Helpers (undefined)
 import Prelude (class Eq)

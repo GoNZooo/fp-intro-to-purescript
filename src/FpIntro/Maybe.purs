@@ -14,8 +14,8 @@ module FpIntro.Maybe where
 import FpIntro.Helpers (undefined)
 import Prelude ((==), class Show, class Eq, show, (<>))
 
-data Maybe a =
-  Just a
+data Maybe a
+  = Just a
   | Nothing
 
 -- | Return `true` when a `Maybe` is `Nothing` and `false` when it's
