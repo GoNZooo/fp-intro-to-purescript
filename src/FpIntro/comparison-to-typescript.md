@@ -129,7 +129,20 @@ export const heightOf = (element: OurElement | null): number => {
 };
 ```
 
-In PureScript we have a few ways of checking for the existence of `element`.
+In PureScript, since this is a container type wrapping something else, we define
+`Maybe` as follows:
+
+```purescript
+data Maybe a =
+  Nothing
+  | Just a
+```
+
+The `a` in this definition can stand in for any type, since `Maybe` can wrap any
+type you want. When you have a `Maybe Int` you either have `Nothing` or `Just 1`,
+for example.
+
+There are a few ways of checking for the existence of `element` available to us.
 
 We can "pattern-match" on the constructors of the value, in this case `Just` &
 `Nothing`:
