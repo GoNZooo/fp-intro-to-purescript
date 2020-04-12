@@ -11,6 +11,11 @@ As such, it's built on a foundation of pure functional programming that is very
 suitable for teaching and expressing abstraction via functions and data
 structures.
 
+## Syntax overview and comparison to TypeScript
+
+There is an overview of some differences and similarities between PureScript and
+TypeScript [here](./comparison-to-typescript.md).
+
 ## Setup
 
 Run the following in order to set the project up:
