@@ -174,3 +174,44 @@ heightOf :: Maybe OurElement -> Number
 heightOf maybeElement =
   maybe 0.0 (\element -> element.height) maybeElement
 ```
+
+This brings us to the topic of composite types.
+
+## Composite types
+
+A composite type is one that is created out of the primitive types. `Maybe` is
+one of these, together with a big amount of readily available ones in the eco
+system.
+
+Let's look at how we might define a person in TypeScript:
+
+```typescript
+interface Person {
+  name: string;
+  age: number;
+  // This could also be `Array<string>`
+  hobbies: string[];
+}
+
+// creates a `Person`
+const Person = (name: string, age: number, hobbies: string[]): Person => {
+  // could also be {name: name, age: age, hobbies: hobbies}
+  return { name, age, hobbies };
+};
+```
+
+```purescript
+data Person =
+  Person { name    :: String
+         , age     :: Int
+         , hobbies :: Array String
+         }
+```
+
+Note that the constructor function we made above for `Person` corresponds to the
+`Person` constructor we have in PureScript. When we want to create a person we
+simply say:
+
+```purescript
+myPerson = Person {name: "Rickard", age: 32, hobbies: ["programming", "gaming"]}
+```
