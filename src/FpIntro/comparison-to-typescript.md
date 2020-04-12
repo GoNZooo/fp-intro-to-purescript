@@ -12,6 +12,89 @@ languages that don't have the same facilities.
 Serving the same purpose, these languages are bound to have similarities, but
 also some differences. Let's look at a few.
 
+## Primitive datatypes
+
+The primitive datatypes in a language/environment are the basic data types that
+make up all other types.
+
+In TypeScript these are:
+
+- `number`
+- `string`
+- `boolean`
+- `symbol`
+- `null`
+- `undefined`
+
+PureScript does not match this 1-for-1, but the differences aren't too stark:
+
+- `number` is split into `Int` and `Number` depending on whether or not you want
+  to represent an integer or a floating point value.
+- `string` is `String`, but `Char` exists to represent a single character
+- `boolean` is `Boolean`
+- `symbol` is `Symbol`
+- Both `null` and `undefined` are expressed using `Maybe SomeType`. This is a
+  container type expressing the existence or non-existence of something.
+
+This last bit is worth looking at in just a bit more detail.
+
+### `null` or `undefined` / `Maybe`
+
+When expressing the absence or existence of something in TypeScript, we usually
+do the following:
+
+```typescript
+const heightOf = (element: OurElement | null): number => {
+  return element !== null ? element.height : 0;
+};
+```
+
+In newer TypeScript versions you can also write:
+
+```typescript
+export const heightOf = (element: OurElement | null): number => {
+  // The element is first checked for `null`. If it's `null` the entire
+  // `element?.height` expression will be `null`. If it is, the `??` operator
+  // will make the full expression return 0.
+  // If it's not `null`, the `element?.height` expression will instead return
+  // the actual number and that's what will be returned.
+  return element?.height ?? 0;
+};
+```
+
+In PureScript we have a few ways of checking for the existence of `element`.
+
+We can "pattern-match" on the constructors of the value, in this case `Just` &
+`Nothing`:
+
+```purescript
+heightOf :: Maybe OurElement -> Number
+heightOf (Just element) = element.height
+heightOf Nothing        = 0.0
+```
+
+We can also do use a `case` expression to do case analysis of the value:
+
+```purescript
+heightOf :: Maybe OurElement -> Number
+heightOf maybeElement =
+  case maybeElement of
+    Just element -> element.height
+    Nothing      -> 0.0
+```
+
+In this case (and many others) there are functions that themselves take functions
+as arguments to determine what to do for each case of the value. In this case we
+are first passing the value that will be returned when the value is `Nothing`,
+0.0 and then we are passing the function to execute on the element if there is
+one.
+
+```purescript
+heightOf :: Maybe OurElement -> Number
+heightOf maybeElement =
+  maybe 0.0 (\element -> element.height) maybeElement
+```
+
 ## Syntax
 
 ### Named functions
