@@ -1,10 +1,13 @@
 module FpIntro.Exercises.Exercise1 where
 
 import Prelude
+
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
 import Data.List (List)
 import FpIntro.Helpers (undefined)
+import Test.QuickCheck (class Arbitrary)
+import Test.QuickCheck.Arbitrary (genericArbitrary)
 
 -- In PureScript we can create functions in several ways. We can define them 
 -- with names as follows:
@@ -49,16 +52,23 @@ derive instance genericProfession :: Generic Profession _
 instance showProfession :: Show Profession where
   show = genericShow
 
+instance arbitraryProfession :: Arbitrary Profession where
+  arbitrary = genericArbitrary
+
 newtype Person
   = Person
   { age :: Int
   , profession :: Profession
   }
 
+derive instance eqPerson :: Eq Person
 derive instance genericPerson :: Generic Person _
 
 instance showPerson :: Show Person where
   show = genericShow
+
+instance arbitraryPerson :: Arbitrary Person where
+  arbitrary = genericArbitrary
 
 -- Write a function that gets an age and a list of people and returns all the
 -- people above or equal to that age.
