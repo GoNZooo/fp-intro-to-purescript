@@ -5,6 +5,8 @@ import Prelude
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
 import Data.List (List)
+import Data.Maybe (Maybe)
+import Data.Newtype (class Newtype)
 import FpIntro.Helpers (undefined)
 import Test.QuickCheck (class Arbitrary)
 import Test.QuickCheck.Arbitrary (genericArbitrary)
@@ -62,7 +64,10 @@ newtype Person
   }
 
 derive instance eqPerson :: Eq Person
+
 derive instance genericPerson :: Generic Person _
+
+derive instance newtypePerson :: Newtype Person _
 
 instance showPerson :: Show Person where
   show = genericShow
@@ -87,14 +92,27 @@ haveProfession = undefined
 
 -- Write a function that gets a list of professions and a list of people and
 -- returns all the people who have any of those professions.
-haveAnyOfProfessions :: Profession -> List Person -> List Person
+haveAnyOfProfessions :: List Profession -> List Person -> List Person
 haveAnyOfProfessions = undefined
 
--- Write a function that gets a list of people and adds up all the age.
+-- Write a function that gets a list of people and adds up all the ages.
 totalAge :: List Person -> Int
 totalAge = undefined
 
+type AgeDifference
+  = { low :: Int
+    , high :: Int
+    }
+
+-- Write a function that gets a list of people and returns the highest age.
+highestAge :: List Person -> Maybe Int
+highestAge = undefined
+
+-- Write a function that gets a list of people and returns the lowest age.
+lowestAge :: List Person -> Maybe Int
+lowestAge = undefined
+
 -- Write a function that gets a list of people and returns the biggest age
 -- difference that exists among the people.
-biggestAgeDifference :: List Person -> Int
+biggestAgeDifference :: List Person -> AgeDifference
 biggestAgeDifference = undefined
