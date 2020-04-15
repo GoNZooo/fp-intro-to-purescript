@@ -10,6 +10,7 @@ import Effect (Effect)
 import Effect.Aff (Aff)
 import Effect.Aff as Aff
 import Effect.Class.Console (log)
+import FpIntro.Exercises.Exercise1Test (exercise1Spec)
 import FpIntro.ListTest (listSpec)
 import FpIntro.MaybeTest (maybeSpec)
 import FpIntro.RecursionTest (recursionSpec)
@@ -42,10 +43,11 @@ runTests (Just test) = runOneTest lowerCased
   lowerCased = toLower test
 
 runTests Nothing = runSpec [consoleReporter] do
-  simpleSpec
   recursionSpec
   maybeSpec
   listSpec
+  simpleSpec
+  exercise1Spec
 
 runOneTest :: String -> Aff Unit
 runOneTest "simple" = runSpec [consoleReporter] simpleSpec
