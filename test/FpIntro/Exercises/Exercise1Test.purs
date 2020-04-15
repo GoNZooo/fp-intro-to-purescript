@@ -1,10 +1,9 @@
 module FpIntro.Exercises.Exercise1Test where
 
 import Prelude
-
 import Data.Foldable (maximumBy, minimumBy)
 import Data.List as List
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), maybe)
 import Data.Tuple (Tuple(..))
 import FpIntro.Exercises.Exercise1 (Person(..))
 import FpIntro.Exercises.Exercise1 as Ex1
@@ -44,6 +43,24 @@ exercise1Spec = do
         $ quickCheck \people ->
             specifyEqual (Ex1.totalAge people)
               (List.foldr (\(Person { age }) total -> total + age) 0 people)
+    describe "`highestAge`" do
+      it "gets the highest age"
+        $ quickCheck \people ->
+            specifyEqual (Ex1.highestAge people)
+              ( List.foldr
+                  (\(Person { age }) result -> maybe (Just age) (pure <<< max age) result)
+                  Nothing
+                  people
+              )
+    describe "`lowestAge`" do
+      it "gets the lowest age"
+        $ quickCheck \people ->
+            specifyEqual (Ex1.lowestAge people)
+              ( List.foldr
+                  (\(Person { age }) result -> maybe (Just age) (pure <<< min age) result)
+                  Nothing
+                  people
+              )
     describe "`biggestAgeDifference`" do
       it "gets the biggest difference"
         $ quickCheck \people ->
@@ -51,7 +68,7 @@ exercise1Spec = do
               oldest =
                 maximumBy
                   ( \(Person { age: aAge }) (Person { age: bAge }) ->
-                        compare aAge bAge
+                      compare aAge bAge
                   )
                   people
 
@@ -68,8 +85,7 @@ exercise1Spec = do
                   (Just (Person { age: minAge' })) ->
                   specifyEqual (Ex1.biggestAgeDifference people)
                     { low: minAge', high: maxAge' }
-                Tuple Nothing Nothing ->
-                  Success
+                Tuple Nothing Nothing -> Success
                 result ->
                   Helpers.error
                     $ "Couldn't get min & max age in generated people: "
