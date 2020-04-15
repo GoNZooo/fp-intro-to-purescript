@@ -9,7 +9,6 @@ import FpIntro.Exercises.Exercise1 (Person(..))
 import FpIntro.Exercises.Exercise1 as Ex1
 import FpIntro.Helpers as Helpers
 import FpIntro.TestUtils (specifyEqual)
-import Test.QuickCheck (Result(..))
 import Test.Spec (Spec, describe, it)
 import Test.Spec.QuickCheck (quickCheck)
 
@@ -84,8 +83,10 @@ exercise1Spec = do
                   (Just (Person { age: maxAge' }))
                   (Just (Person { age: minAge' })) ->
                   specifyEqual (Ex1.biggestAgeDifference people)
-                    { low: minAge', high: maxAge' }
-                Tuple Nothing Nothing -> Success
+                    (Just { low: minAge', high: maxAge' })
+                Tuple Nothing Nothing ->
+                  specifyEqual (Ex1.biggestAgeDifference people)
+                    Nothing
                 result ->
                   Helpers.error
                     $ "Couldn't get min & max age in generated people: "

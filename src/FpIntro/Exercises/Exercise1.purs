@@ -1,7 +1,6 @@
 module FpIntro.Exercises.Exercise1 where
 
 import Prelude
-
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
 import Data.List (List)
@@ -114,5 +113,5 @@ lowestAge = undefined
 
 -- Write a function that gets a list of people and returns the biggest age
 -- difference that exists among the people.
-biggestAgeDifference :: List Person -> AgeDifference
+biggestAgeDifference :: List Person -> Maybe AgeDifference
 biggestAgeDifference = undefined
