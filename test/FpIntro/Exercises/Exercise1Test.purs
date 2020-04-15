@@ -6,8 +6,6 @@ import Data.Foldable (maximumBy, minimumBy)
 import Data.List as List
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
-import Debug.Trace as Debug
-import Debug.Trace as Debug.Trace
 import FpIntro.Exercises.Exercise1 (Person(..))
 import FpIntro.Exercises.Exercise1 as Ex1
 import FpIntro.Helpers as Helpers
