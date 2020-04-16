@@ -98,11 +98,6 @@ haveAnyOfProfessions = undefined
 totalAge :: List Person -> Int
 totalAge = undefined
 
-type AgeDifference
-  = { low :: Int
-    , high :: Int
-    }
-
 -- Write a function that gets a list of people and returns the highest age.
 highestAge :: List Person -> Maybe Int
 highestAge = undefined
@@ -110,6 +105,11 @@ highestAge = undefined
 -- Write a function that gets a list of people and returns the lowest age.
 lowestAge :: List Person -> Maybe Int
 lowestAge = undefined
+
+type AgeDifference
+  = { low :: Int
+    , high :: Int
+    }
 
 -- Write a function that gets a list of people and returns the biggest age
 -- difference that exists among the people.
