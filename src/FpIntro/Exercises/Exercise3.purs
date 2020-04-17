@@ -54,5 +54,14 @@ discounts =
           }
     }
 
+-- Create a function that receives a list of vacationers and calculates the
+-- total price for all of them, given the data in `discounts`. When the amount
+-- of people is equal to or above the specified amount, all ticket purchases get
+-- discounted by the specified percentage for that group.
 vacation :: List Vacationer -> Number
 vacation = undefined
+
+-- Create a function that does the same thing as `vacation` but from a list of
+-- strings. The strings should be decoded into a list of vacationers.
+decodeVacation :: List String -> Number
+decodeVacation = undefined
